@@ -10,8 +10,9 @@ end
 
 module Ruboty
   module Handlers
+    # Ruboty::Trello
     class Trello < Base
-      LIST_PATTERN = /trello\s+list(\s+user:(?<user_name>\S+))*/
+      LIST_PATTERN = /trello\s+list(\s+user:(?<user_name>\S+))?(\s+ignore:(?<ignore_keywords>.+))?/
       on(
         /trello\s+b\s+(?<board_name>.*)\s+l\s+(?<list_name>.*)\s+c\s+(?<name>.*)\z/i,
         name: 'add_card',
