@@ -20,8 +20,17 @@ Or install it yourself as:
 
 ## Usage
 
+### Add a task
+
 ```
 @ruboty trello b <board_name> l <list_name> c <card_name>
+```
+
+### List tasks
+
+```
+@ruboty trello list
+@ruboty trello list user:user_id
 ```
 
 ## ENV
