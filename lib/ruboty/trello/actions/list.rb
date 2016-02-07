@@ -23,6 +23,7 @@ module Ruboty
             end
           end
           message.reply(msg.join("\n"))
+          false
         end
       end
     end

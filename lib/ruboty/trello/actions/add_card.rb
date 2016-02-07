@@ -33,6 +33,7 @@ module Ruboty
             prefix = ENV['TRELLO_RESPONSE_PREFIX'] || 'Created'
             message.reply "#{prefix} #{new_card.short_url}"
           end
+          false
         end
       end
     end
