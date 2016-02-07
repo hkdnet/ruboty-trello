@@ -12,7 +12,7 @@ module Ruboty
             msg.push "■ #{board.name}"
             board.lists.each do |list|
               list.cards.each do |card|
-                msg.push "[#{list.name}] #{card.name}"
+                msg.push "  [#{list.name}] #{card.name}"
               end
             end
           end
