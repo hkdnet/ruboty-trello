@@ -31,6 +31,8 @@ Or install it yourself as:
 ```
 @ruboty trello list
 @ruboty trello list user:user_id
+@ruboty trello list ignore:keywords
+@ruboty trello list user:user_id ignore:keywords
 ```
 
 ## ENV
