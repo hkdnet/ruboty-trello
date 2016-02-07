@@ -3,27 +3,38 @@ require 'trello'
 module Ruboty
   module Trello
     module Actions
+      # list tasks in trello
       class List < ::Ruboty::Actions::Base
         def call
-          user_name = message[:user_name] || 'me'
-          user = ::Trello::Member.find(user_name)
-          msg = []
-          if user.nil?
-            return message.reply("User '#{user_name}' not found")
-          else
-            msg.push("#{user_name}'s task...")
-          end
+          @msg = []
+          return message.reply("User '#{user_name}' not found") if user.nil?
+          @msg.push("#{user_name}'s task...")
+          build_msg
+          message.reply(@msg.join("\n"))
+          false
+        end
+
+        def user_name
+          message[:user_name] || 'me'
+        end
+
+        def user
+          @user ||= ::Trello::Member.find(user_name)
+        end
+
+        def build_msg
           user.boards.each do |board|
-            msg.push "  ■ #{board.name}"
+            @msg.push "  ■ #{board.name}"
             board.lists.each do |list|
-              list.cards.each do |card|
-                next if message[:assigned_only] && !card.member_ids.include?(user.id)
-                msg.push "    [#{list.name}] #{card.name}"
+              list.cards.select { |e| filter_message(e) }.each do |card|
+                @msg.push "    [#{list.name}] #{card.name}"
               end
             end
           end
-          message.reply(msg.join("\n"))
-          false
+        end
+
+        def filter_message(card)
+          !message[:assigned_only] || card.member_ids.include?(user.id)
         end
       end
     end
