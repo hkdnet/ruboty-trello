@@ -34,7 +34,7 @@ module Ruboty
         end
 
         def filter_message(card)
-          !message[:assigned_only] || card.member_ids.include?(user.id)
+          user_name != 'me' || card.member_ids.include?(user.id)
         end
       end
     end
